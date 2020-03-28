@@ -1,0 +1,29 @@
+<h1>ここは登録ユーザ一覧です</h1>
+/Users予定
+
+<%= form_for(@book, url: users_index_path) do |f| %>
+
+  <% if @book.errors.any? %>
+    <div id="error_explanation" class="error">
+      <h2 class="error-name"><%= @book.errors.count %>errors prohibited this book from being saved:</h2>
+      <ul>
+        <% @book.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class ="field-style">
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div class ="field-style">
+    <%= f.label :body %>
+    <%= f.text_area :body %>
+  </div>
+
+  <%= f.submit 'Create Book' %>
+
+<% end %>
