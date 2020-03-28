@@ -6,5 +6,8 @@ Rails.application.routes.draw do
 
   get 'users' => 'users#index', as: 'users_index'
 
+  get 'users/:id' => 'users#show', as: 'users_show'
+
   resources :books, only: [:new, :create, :index, :show]
+  resources :users, only: [:new, :create, :index, :show]
 end

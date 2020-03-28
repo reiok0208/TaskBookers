@@ -2,23 +2,12 @@ class UsersController < ApplicationController
   def new
   end
   def index
+  	@users = User.all
   	@book = Book.new
   end
-  def create
-    @book = Book.new(book_params)
-    if @book.save
-      flash[:notice] = "Book was successfully created."
-      redirect_to users_index_path
-    else
-      render :index
-    end
-  end
-  def show
-  end
 
-  private
-  def book_params
-        params.require(:book).permit(:title, :body)
+  def show
+  	@user = User.find(params[:id])
   end
 
 end
