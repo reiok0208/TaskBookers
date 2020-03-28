@@ -17,10 +17,10 @@
         <p>Home</p>
       </li>
       <li class="">
-        <p>Users</p>
+        <%= link_to "Users", users_index_path %>
       </li>
       <li class="">
-        <p>Books</p>
+        <%= link_to "Books", books_path %>
       </li>
       <li class="">
         <%= link_to "logout", destroy_user_session_path, method: :delete %>
