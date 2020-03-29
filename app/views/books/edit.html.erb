@@ -1,0 +1,12 @@
+<h1>Editing Book</h1>
+<%= form_for(@book) do |f| %>
+<div class="field-style">
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+</div>
+<div class="field-style">
+  <label>Opinion</label>
+  <%= f.text_area :body %>
+</div>
+<%= f.submit 'Update Book' %>
+<% end %>
