@@ -1,2 +1,27 @@
-<h1>ここはユーザー詳細の画面です</h1>
-users/id予定
+<%= render 'users/infonew', book: @book %>
+
+<h1>Books</h1>
+<% if @user.id == current_user.id %>
+        <p><%= link_to "プロフィール編集", edit_user_path(@user.id) %></p>
+<% end %>
+
+<table>
+<% @books.each_with_index do |book,i| %>
+  <% if i < 1 %>
+    <thead>
+      <tr>
+        <th> </th>
+        <th>Title</th>
+        <th>Opinion</th>
+      </tr>
+    </thead>
+  <% end %>
+    <tbody>
+  	  <tr>
+        <td><%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size:'60x60' %></td>
+  	    <td><%= link_to book.title, book_path(book), class: "pull-right" %></td>
+  	    <td><%= book.body %></td>
+  	  </tr>
+    </tbody>
+<% end %>
+  </table>

@@ -8,6 +8,6 @@ Rails.application.routes.draw do
 
   get 'users/:id' => 'users#show', as: 'users_show'
 
-  resources :books, only: [:new, :create, :index, :show]
-  resources :users, only: [:new, :create, :index, :show]
+  resources :books, only: [:new, :create, :index, :show, :edit, :update, :destroy]
+  resources :users, only: [:new, :create, :index, :show, :edit, :update]
 end
