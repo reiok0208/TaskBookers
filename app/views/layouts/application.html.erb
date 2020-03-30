@@ -10,6 +10,7 @@
 </head>
 
 <body>
+  <header>
   <h1>Bookers</h1>
   <div id="slidemenu">
     <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
@@ -29,10 +30,10 @@
 
       <% else %>
       <li class="">
-        <p>Home</p>
+        <%= link_to "Home", root_path %>
       </li>
       <li class="">
-        <p>About</p>
+        <%= link_to "About", homes_about_path %>
       </li>
       <li class="">
         <%= link_to "signup", new_user_registration_path %>
@@ -43,7 +44,14 @@
       <% end %>
     </ul>
   </div>
-  <%= yield %>
+</header>
+<% if flash[:notice] %>
+  <p class="notice"><%= flash[:notice] %></p>
+<% end %>
+<%= yield %>
+<footer>
+CopyRight Infratop.inc
+</footer>
 </body>
 
 </html>

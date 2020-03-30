@@ -1,11 +1,13 @@
+<%= render 'users/infonew', book: @bookinfo, user: @userinfo %>
+
 <h1>Book detail</h1>
 
 <div>
   <table>
     <tbody>
   	  <tr>
-        <td><%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size:'60x60' %></td>
-  	    <td><%= @book.title %></td>
+        <td><%= link_to attachment_image_tag(@user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size:'60x60'), users_show_path(@book.user) %></td>
+  	    <td><%= link_to @book.title, book_path(@book) %></td>
   	    <td><%= @book.body %></td>
         <td><% if @book.user == current_user %>
                 <%= link_to "Edit", edit_book_path(@book) %>
@@ -16,5 +18,5 @@
   	  </tr>
     </tbody>
   </table>
-  <p><%= @user.name %></p>
+  <p><%= link_to @user.name, users_show_path(@book.user) %></p>
 </div>

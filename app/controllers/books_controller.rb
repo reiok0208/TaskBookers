@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
@@ -7,10 +8,15 @@ class BooksController < ApplicationController
     redirect_to book_path(@book)
   end
   def show
+    @userid = Book.find(params[:id]) #Bookモデルから接続先の情報を持ってくる(URL:books/1なら1のカラム)
+    @userinfo = @userid.user #@useridからuser_id(関連付け)を引き出す(_idは記入しない)
+    @bookinfo =Book.new
     @book = Book.find(params[:id])
     @user = @book.user
   end
   def index
+    @userinfo = current_user
+    @bookinfo =Book.new
   	@books = Book.all
   end
   def edit
@@ -27,6 +33,7 @@ class BooksController < ApplicationController
   def destroy
     @book = Book.find(params[:id])
     if @book.destroy
+      flash[:notice] = "Book was successfully destroyed."
       redirect_to books_path
     else
       render :edit
