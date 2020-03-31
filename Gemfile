@@ -71,7 +71,7 @@ group :development do
   gem 'binding_of_caller'
 end
 
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', '~> 3.4.1'
 gem 'jquery-rails'
 
 group :test do
