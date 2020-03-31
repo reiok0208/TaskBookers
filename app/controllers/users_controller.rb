@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
-  before_action :correct_user, only: [:edit, :update]
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
+  before_action :correct_user, only: [:edit, :update]
   def new
   end
   def index
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
       redirect_to user_path(@user)
     else
       flash[:danger] = @user.errors.full_messages
-      redirect_to edit_user_path
+      redirect_to user_path(@user)
     end
   end
 
