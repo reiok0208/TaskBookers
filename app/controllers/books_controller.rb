@@ -34,7 +34,7 @@ class BooksController < ApplicationController
       redirect_to book_path(@book)
     else
       flash[:danger] = @book.errors.full_messages
-      redirect_to edit_book_path
+      redirect_to book_path(@book)
     end
   end
 
