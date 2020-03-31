@@ -1,3 +1,12 @@
+<% if flash[:danger] %>
+  <% flash.each do |message_type, messages| %>
+    <h2 class="error-name"><%= flash[:danger].count %>errors prohibited this book from being saved:</h2>
+    <% messages.each do |message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+    <% end %>
+  <% end %>
+<% end %>
+
 <h1>User info</h1>
 <p><%= attachment_image_tag user, :profile_image, :fill, 150, 150, format: 'jpeg', fallback: "no_image.jpg", size:'150x150' %></p>
 <p>name<%= user.name %></p>

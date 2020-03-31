@@ -1,11 +1,16 @@
 class BooksController < ApplicationController
+  before_action :correct_user, only: [:edit, :update]
   before_action :authenticate_user!
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
-    @book.save
+    if @book.save
     flash[:notice] = "Book was successfully created."
     redirect_to book_path(@book)
+    else
+      flash[:danger] = @book.errors.full_messages
+      redirect_to books_path
+    end
   end
   def show
     @userid = Book.find(params[:id]) #Bookモデルから接続先の情報を持ってくる(URL:books/1なら1のカラム)
@@ -27,6 +32,9 @@ class BooksController < ApplicationController
     if @book.update(book_params)
       flash[:notice] = "Book was successfully updated."
       redirect_to book_path(@book)
+    else
+      flash[:danger] = @book.errors.full_messages
+      redirect_to edit_book_path
     end
   end
 
@@ -44,4 +52,12 @@ class BooksController < ApplicationController
   def book_params
         params.require(:book).permit(:title, :body)
   end
+
+  def correct_user
+    user = Book.find(params[:id])
+    if current_user != user
+      redirect_to books_path
+    end
+  end
+
 end
