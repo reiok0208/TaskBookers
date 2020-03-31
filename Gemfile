@@ -70,3 +70,13 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
 end
+
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'jquery-rails'
+
+group :test do
+  gem 'capybara', '>= 2.15'
+  gem 'rspec-rails'
+  gem "factory_bot_rails"
+  gem 'faker'
+end
