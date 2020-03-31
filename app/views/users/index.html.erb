@@ -1,20 +1,28 @@
-<%= render 'users/infonew', book: @bookinfo, user: @userinfo %>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-4">
+      <%= render 'users/infonew', book: @bookinfo, user: @userinfo %>
+    </div>
 
-<h1>Users</h1>
-<table>
-    <thead>
-    <tr>
-      <th>image</th>
-      <th>name</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% @users.each do |user| %>
-    <tr>
-      <td><%= attachment_image_tag user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size:'60x60' %></td>
-      <td><%= user.name %></td>
-      <td><%= link_to "Show", users_show_path(user.id) %></td>
-    </tr>
-  <% end %>
-    </tbody>
-</table>
+    <div class="col-lg-8">
+      <h1>Users</h1>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>image</th>
+            <th>name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @users.each do |user| %>
+          <tr>
+            <td><%= attachment_image_tag user, :profile_image, :fill, 60, 60, format: 'jpeg', fallback: "no_image.jpg", size:'60x60' %></td>
+            <td><%= user.name %></td>
+            <td><%= link_to "Show", users_show_path(user.id) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

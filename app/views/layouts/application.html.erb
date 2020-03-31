@@ -2,56 +2,76 @@
 <html>
 
 <head>
-  <title>TaskBookers</title>
+  <title>Bookers</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <style>
+    .title{
+      color: white;
+      font-size: 20px;
+    }
+
+    li{
+      margin: 20px;
+      color: white;
+    }
+
+    ul{
+      padding-right: 50px;
+    }
+
+    .copyright{
+      padding-right: 200px;
+    }
+
+    .error-name{
+      color: #a94442;
+    }
+
+  </style>
 </head>
 
 <body>
-  <header>
-  <h1>Bookers</h1>
-  <div id="slidemenu">
-    <ul class="nav navbar-nav navbar-right" data-hover="dropdown" data-animations="zoomIn fadeIn fadeInUp fadeIn">
-      <% if user_signed_in? %>
-      <li class="">
-        <%= link_to "Home", user_path(current_user) %>
-      </li>
-      <li class="">
-        <%= link_to "Users", users_index_path %>
-      </li>
-      <li class="">
-        <%= link_to "Books", books_path %>
-      </li>
-      <li class="">
-        <%= link_to "logout", destroy_user_session_path, method: :delete %>
-      </li>
+  <nav class="navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <h1 class="title">Bookers</h1>
+      </div>
+      <ul class="navbar-nav navbar-right" >
+        <% if user_signed_in? %>
+        <li class="glyphicon glyphicon-home" aria-hidden="true"><%= link_to " Home", user_path(current_user) %></li>
+        <li class="glyphicon glyphicon-user" aria-hidden="true"><%= link_to " Users", users_index_path %></li>
+        <li class="glyphicon glyphicon-book" aria-hidden="true"><%= link_to " Books", books_path %></li>
+        <li class="glyphicon glyphicon-log-out" aria-hidden="true"><%= link_to " logout", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+        <li class="glyphicon glyphicon-home" aria-hidden="true"><%= link_to " Home", root_path %></li>
+        <li class="glyphicon glyphicon-link" aria-hidden="true"><%= link_to " About", homes_about_path %></li>
+        <li class="glyphicon glyphicon-edit" aria-hidden="true"><%= link_to " signup", new_user_registration_path %></li>
+        <li class="glyphicon glyphicon-log-in" aria-hidden="true"><%= link_to " login", new_user_session_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </nav>
 
-      <% else %>
-      <li class="">
-        <%= link_to "Home", root_path %>
-      </li>
-      <li class="">
-        <%= link_to "About", homes_about_path %>
-      </li>
-      <li class="">
-        <%= link_to "signup", new_user_registration_path %>
-      </li>
-      <li class="">
-        <%= link_to "login", new_user_session_path %>
-      </li>
-      <% end %>
-    </ul>
-  </div>
-</header>
-<% if flash[:notice] %>
+  <% if flash[:notice] %>
   <p class="notice"><%= flash[:notice] %></p>
-<% end %>
-<%= yield %>
-<footer>
-CopyRight Infratop.inc
-</footer>
+  <% end %>
+
+  <% if flash[:danger] %>
+    <% flash.each do |message_type, messages| %>
+      <h2 class="error-name"><%= flash[:danger].count %>errors prohibited this book from being saved:</h2>
+      <% messages.each do |message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+  <%= yield %>
+  <footer class="navbar-right">
+    <p class="copyright">CopyRight Infratop.inc</p>
+  </footer>
 </body>
 
 </html>
